@@ -2,20 +2,13 @@ package ua.kiev.podolsky.DataGenerator.DataDictionary;
 
 import ua.kiev.podolsky.DataGenerator.DataConnector.DataConnector;
 
-public class OracleDictionaryConnector implements DataConnector{
+public class OracleDictionaryConnector extends DataConnector{
 
 	@Override
-	public String getConnectString() {
+	public String getJdbcDriverName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public void setConnectString(String s) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	publi
 
 }

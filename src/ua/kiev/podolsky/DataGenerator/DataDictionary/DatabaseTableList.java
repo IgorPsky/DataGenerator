@@ -1,10 +1,9 @@
 package ua.kiev.podolsky.DataGenerator.DataDictionary;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-class DatabaseTableList {
-
-	private List<DatabaseTable> intList = new ArrayList<DatabaseTable>();
-	
+public class DatabaseTableList {
+	private Set<DatabaseTable> intList = new HashSet<DatabaseTable>();
+	Set<DatabaseTable> intList() {return intList;}
 }
