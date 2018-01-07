@@ -9,17 +9,21 @@ import ua.kiev.podolsky.DataGenerator.DataConnector.DataConnector;
 public class DatabaseTable extends DatabaseObject{
 	private String owner;
 	private String name;
-	private DataConnector connector;
-	private List<DatabaseTableColumn> columns;
-	DatabaseTable(String owner, String name, DataConnector connector){
+	private DataDictionaryConnector connector;
+	private DatabaseTableColumnList columns = null;
+	public DatabaseTable(String owner, String name, DataDictionaryConnector connector){
 		super();
 		this.owner = owner;
 		this.name = name;
 		this.connector = connector;
-		this.columns = new ArrayList<DatabaseTableColumn>();
 	}
 	public String owner() {return this.owner;};
 	public String name() {return this.name;};
-	public DataConnector connector() {return this.connector;};
-	public List<DatabaseTableColumn> columns() {return columns;}
+	public DataDictionaryConnector connector() {return this.connector;};
+	public DatabaseTableColumnList columns() {
+		if (columns == null) {
+			columns = connector.listColumns(this);
+		}
+        return columns;
+	}
 }

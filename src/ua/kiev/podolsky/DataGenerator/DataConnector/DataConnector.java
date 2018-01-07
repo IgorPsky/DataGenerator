@@ -16,6 +16,7 @@ public abstract class DataConnector {
 		conn = DriverManager.getConnection(connectString, user, password);
 		isConnected = true;
 	}
+	public Connection connection() {return conn;};
 	public void disconnect() {
 		try {
 			conn.close();
