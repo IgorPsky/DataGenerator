@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 // Notice, do not import com.mysql.jdbc.*
-// or you will have problems!
+// or yo u will have problems!
 
 public class LoadDriver {
     public static void main(String[] args) {
