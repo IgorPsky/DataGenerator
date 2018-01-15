@@ -32,14 +32,14 @@ public class MySQLDictionaryConnector implements DataDictionaryConnector {
 		return result;
 	}
 	@Override
-	public DatabaseTableColumnList listColumns(DatabaseTable table) {
+	public DatabaseTableColumnList listColumns(DatabaseTable table, String whereCondition) {
 		DatabaseTableColumnList result = new DatabaseTableColumnList();
 		try {
 			Statement stmt = dc.connection().createStatement();
 			ResultSet s = stmt.executeQuery("select table_schema, table_name from information_schema.TABLES where 0=0 and "+whereCondition);
 			while(s.next()) {
 				DatabaseTable t = new DatabaseTable(s.getString(1), s.getString(2), this);
-				result.List().add(t);
+				result.list().add(null);
 			}
 		}
 	    catch(SQLException e) {

@@ -22,7 +22,7 @@ public class DatabaseTable extends DatabaseObject{
 	public DataDictionaryConnector connector() {return this.connector;};
 	public DatabaseTableColumnList columns() {
 		if (columns == null) {
-			columns = connector.listColumns(this);
+			columns = connector.listColumns(this, "0=0");
 		}
         return columns;
 	}
