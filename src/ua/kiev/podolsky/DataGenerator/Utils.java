@@ -7,3 +7,4 @@ public class Utils {
 	public static final Random random = new Random(47);
 	public static final Logger LOGGER = Logger.getLogger("DataGenerator");
 }
+
