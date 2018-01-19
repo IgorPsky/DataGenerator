@@ -4,7 +4,7 @@ public abstract class DatabaseTableColumn {
   private String columnName;
   private boolean isNullable;
   private int length;
-  DatabaseTableColumn(String name, int length, boolean isNullable){
+  public DatabaseTableColumn(String name, int length, boolean isNullable){
 	  columnName = name;
 	  this.isNullable = isNullable;
 	  this.length = length;

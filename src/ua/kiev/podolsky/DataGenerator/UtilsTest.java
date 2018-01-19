@@ -9,6 +9,7 @@ class UtilsTest {
 	@Test
 	void test() {
 		assertNotEquals(Utils.LOGGER, null);
+		assertNotEquals(Utils.random, null);
 	}
 
 }

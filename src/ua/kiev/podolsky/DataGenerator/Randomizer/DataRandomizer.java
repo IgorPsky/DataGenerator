@@ -1,5 +1,5 @@
 package ua.kiev.podolsky.DataGenerator.Randomizer;
 
-public interface DataRandomizer {
-	public abstract String getNext();
+public interface DataRandomizer<T> {
+	public abstract T getNext();
 }
