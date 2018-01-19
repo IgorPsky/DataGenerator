@@ -4,14 +4,17 @@ public abstract class DatabaseTableColumn {
   private String columnName;
   private boolean isNullable;
   private int length;
-  public DatabaseTableColumn(String name, int length, boolean isNullable){
+  private DatabaseType type;
+  public DatabaseTableColumn(String name, DatabaseType type, int length, boolean isNullable){
 	  columnName = name;
 	  this.isNullable = isNullable;
 	  this.length = length;
+	  this.type = type;
   }
-  public String Name() {return columnName;};
-  public void setName(String n) {columnName = n;};
-  public int length() {return length;};
-  public boolean isNullable() {return isNullable;};
-  public abstract String getRandomValue(); 
+  public String Name() {return columnName;}
+  public void setName(String n) {columnName = n;}
+  public int length() {return length;}
+  public boolean isNullable() {return isNullable;}
+  public DatabaseType type() {return type;}
+  public abstract String getRandomValue();
 }
