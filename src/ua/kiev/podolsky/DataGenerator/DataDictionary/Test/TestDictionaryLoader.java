@@ -1,5 +1,6 @@
 package ua.kiev.podolsky.DataGenerator.DataDictionary.Test;
 
+import java.util.Map;
 import java.util.Set;
 
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DataDictionaryLoader;
@@ -26,22 +27,21 @@ public class TestDictionaryLoader implements DataDictionaryLoader {
 	
 	class TestDatabaseTableList extends DatabaseTableList {
 		@Override
-		protected Set<DatabaseTable> list(){
-			return super.list();
+		protected void addTable(DatabaseTable t) {
+			super.addTable(t);
 		}
 	}
 	
 	@Override
 	public DatabaseTableList loadTables() {
 		TestDatabaseTableList result = new TestDatabaseTableList();
-		result.list().add(new DatabaseTable("TEST_OWNER", "TEST_TABLE1"));
-		result.list().add(new DatabaseTable("TEST_OWNER", "TEST_TABLE2"));
+		result.addTable(new DatabaseTable("TEST_OWNER", "TEST_TABLE1"));
+		result.addTable(new DatabaseTable("TEST_OWNER", "TEST_TABLE2"));
 		return result;
 	}
 
 	@Override
 	public DatabaseTableColumnList loadColumns(String owner, String tableName) {
-		
 		return null;
 	}
 

@@ -1,87 +1,80 @@
 package ua.kiev.podolsky.DataGenerator.DataDictionary;
 
+import java.util.AbstractSet;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.ListIterator;
+import java.util.Map;
 
-public class DatabaseTableList implements Set<DatabaseTable>{
-	private Set<DatabaseTable> intList = new HashSet<DatabaseTable>();
-	protected Set<DatabaseTable> list() {return intList;}
+public class DatabaseTableList extends AbstractSet<DatabaseTable>{
 	
-	@Override
-	public int size() {
-		return intList.size();
-	}
-	@Override
-	public boolean isEmpty() {
-		return intList.isEmpty();
-	}
-	@Override
-	public boolean contains(Object o) {
-		return intList.contains(o);
-	}
-
-	
-	class TableIterator implements Iterator<DatabaseTable>{
+	private class TableNamePair {
+		private String owner;
+		private String name;
+		TableNamePair(String owner, String name) {
+			this.owner = owner;
+			this.name = name;
+		}
+		
+		TableNamePair(DatabaseTable t) {
+			this.owner = t.owner();
+			this.name = t.name();
+		}
+		
+		public String qualifiedName() {
+			return (owner + "." + name).toLowerCase();
+		}
+		
+		@Override
+		public boolean equals(Object that) {
+			if(this == that) return true;
+			if(that instanceof TableNamePair) {
+				final TableNamePair aThat = (TableNamePair)that;
+				return (this.qualifiedName().equals(aThat.qualifiedName()));
+			}
+			return false;
+		}
 
 		@Override
+		public int hashCode() {
+			return qualifiedName().hashCode();
+		}
+	}
+
+	private Map<TableNamePair, DatabaseTable> intList = new HashMap<>();
+	protected Map<TableNamePair, DatabaseTable> list() {return intList;}
+	
+	class TableIterator implements Iterator<DatabaseTable>{
+		@Override
 		public boolean hasNext() {
-			return intList.iterator().hasNext();
+			return intList.values().iterator().hasNext();
 		}
 
 		@Override
 		public DatabaseTable next() {
-			return intList.iterator().next();
+			return intList.values().iterator().next();
 		}
-
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException();
-		}
-		
 	}
 
 	@Override
 	public Iterator<DatabaseTable> iterator() {
 		return new TableIterator();
 	}
-	@Override
-	public Object[] toArray() {
-		return intList.toArray();
+	
+	public DatabaseTable tableByName(String owner, String name) {
+		return intList.get(new TableNamePair(owner, name));
 	}
-	@Override
-	public <T> T[] toArray(T[] a) {
-		intList.toArray(a);
-		return null;
+	
+	protected void addTable(DatabaseTable table) {
+		intList.put(new TableNamePair(table), table);
 	}
+
 	@Override
-	public boolean add(DatabaseTable o) {
-		throw new UnsupportedOperationException();
+	public int size() {
+		return intList.size();
 	}
-	@Override
-	public boolean remove(Object o) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public boolean containsAll(Collection<?> c) {
-		return intList.containsAll(c);
-	}
-	@Override
-	public boolean addAll(Collection<? extends DatabaseTable> c) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public boolean removeAll(Collection<?> c) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public boolean retainAll(Collection<?> c) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void clear() {
-		throw new UnsupportedOperationException();
-	}
+
 }
