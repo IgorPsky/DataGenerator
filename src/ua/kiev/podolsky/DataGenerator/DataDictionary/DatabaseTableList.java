@@ -48,14 +48,17 @@ public class DatabaseTableList extends AbstractSet<DatabaseTable>{
 	protected Map<TableNamePair, DatabaseTable> list() {return intList;}
 	
 	class TableIterator implements Iterator<DatabaseTable>{
+		
+		private final Iterator<DatabaseTable> iter = intList.values().iterator();
+		
 		@Override
 		public boolean hasNext() {
-			return intList.values().iterator().hasNext();
+			return iter.hasNext();
 		}
 
 		@Override
 		public DatabaseTable next() {
-			return intList.values().iterator().next();
+			return iter.next();
 		}
 	}
 

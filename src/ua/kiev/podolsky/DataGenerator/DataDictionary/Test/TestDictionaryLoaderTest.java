@@ -21,6 +21,7 @@ class TestDictionaryLoaderTest {
 		}
 	}
 
+	
 	@Test
 	void testTable1() {
 		assertNotNull(list.tableByName("test_owner", "test_table1"));
