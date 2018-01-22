@@ -35,11 +35,7 @@ class TestDictionaryLoaderTest {
 	
 	@Test
 	void testColumns() {
-		for(DatabaseTable t: list) {
-			assertEquals(t.owner(), "TEST_OWNER");
-			DatabaseTableColumnList cList = loader.loadColumns(t.owner(), t.name());
-			// assertEquals(cList.list().size(), 2);
-		}
+		assertNotNull(list.tableByName("test_owner", "test_table1").columns().columnByName("ID"));
 	}
 }
 		

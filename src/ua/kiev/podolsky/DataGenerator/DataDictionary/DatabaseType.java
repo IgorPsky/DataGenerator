@@ -1,6 +1,7 @@
 package ua.kiev.podolsky.DataGenerator.DataDictionary;
 
-public abstract class DatabaseType {
-	public abstract String databaseName();
-	public abstract String value();
+public class DatabaseType {
+	public String databaseName() {
+		return "Undefined database type name";
+	}
 }

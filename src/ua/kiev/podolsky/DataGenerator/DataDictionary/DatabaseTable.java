@@ -19,4 +19,7 @@ public class DatabaseTable extends DatabaseObject{
 	public DatabaseTableColumnList columns() {
 		return columns;
 	}
+	public DatabaseTableColumn columnByName(String colName) {
+		return columns().columnByName(colName);
+	}
 }

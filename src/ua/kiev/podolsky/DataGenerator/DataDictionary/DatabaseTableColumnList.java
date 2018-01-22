@@ -1,17 +1,18 @@
 package ua.kiev.podolsky.DataGenerator.DataDictionary;
 
 import java.util.AbstractSet;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
 
 public class DatabaseTableColumnList extends AbstractSet<DatabaseTableColumn> {
-	private List<DatabaseTableColumn> intList = new ArrayList<>(); 
-    protected Collection<DatabaseTableColumn> list() {return intList;}
+	
+	private Map<String, DatabaseTableColumn> intList = new HashMap<>(); 
+    protected Collection<DatabaseTableColumn> list() {return intList.values();}
 	class ColIterator implements Iterator<DatabaseTableColumn> {
 		
-		Iterator<DatabaseTableColumn> iter = intList.iterator();
+		Iterator<DatabaseTableColumn> iter = intList.values().iterator();
 
 		@Override
 		public boolean hasNext() {
@@ -24,6 +25,10 @@ public class DatabaseTableColumnList extends AbstractSet<DatabaseTableColumn> {
 		}
 	}
 	
+	protected void addColumn(DatabaseTableColumn column) {
+		intList.put(column.Name(), column);
+	}
+	
 	@Override
 	public Iterator<DatabaseTableColumn> iterator() {
 		return new ColIterator();
@@ -31,5 +36,9 @@ public class DatabaseTableColumnList extends AbstractSet<DatabaseTableColumn> {
 	@Override
 	public int size() {
 		return intList.size();
+	}
+	
+	public DatabaseTableColumn columnByName(String colName) {
+		return intList.get(colName);
 	}
 }
