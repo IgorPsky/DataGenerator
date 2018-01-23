@@ -16,6 +16,23 @@ public class TestDictionaryLoader implements DataDictionaryLoader {
 			super(table, name, type, length, isNullable);
 		}
 	}
+	
+	class TestDatabaseTable extends DatabaseTable {
+		public TestDatabaseTable(String owner, String name) {
+			super(owner, name);
+		}
+
+		@Override
+		protected DatabaseTableColumnList createColumnList() {
+			return new TestDatabaseTableColumnList();
+		}
+		
+		@Override
+		public TestDatabaseTableColumnList columns() {
+			return (TestDatabaseTableColumnList)super.columns();
+		}
+		
+	}
 
 	class TestDatabaseTableList extends DatabaseTableList {
 		@Override
@@ -41,13 +58,12 @@ public class TestDictionaryLoader implements DataDictionaryLoader {
 
 	@Override
 	public DatabaseTableColumnList loadColumns(DatabaseTable table) {
-		TestDatabaseTableColumnList result = new TestDatabaseTableColumnList();
 		if(table.name().equals("TEST_TABLE1")) {
-			result.addColumn(new DatabaseTableColumn(table, "ID", new DatabaseType(), 10, false));
-			result.addColumn(new DatabaseTableColumn(table, "Name", new DatabaseType(), 255, false));
+			table.columns().addColumn(new TestDatabaseTableColumn(table, "ID", new DatabaseType(), 10, false));
+			result.addColumn(new TestDatabaseTableColumn(table, "Name", new DatabaseType(), 255, false));
 		} else if(table.name().equals("TEST_TABLE2")) {
-			result.addColumn(new DatabaseTableColumn(table, "ID", new DatabaseType(), 10, false));
-			result.addColumn(new DatabaseTableColumn(table, "Name", new DatabaseType(), 255, false));
+			result.addColumn(new TestDatabaseTableColumn(table, "ID", new DatabaseType(), 10, false));
+			result.addColumn(new TestDatabaseTableColumn(table, "Name", new DatabaseType(), 255, false));
 		} else
 			throw new RuntimeException("Table does not exist");
 		return result;

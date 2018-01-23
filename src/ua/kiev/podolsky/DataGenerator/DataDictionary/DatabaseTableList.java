@@ -1,32 +1,34 @@
 package ua.kiev.podolsky.DataGenerator.DataDictionary;
 
 import java.util.AbstractSet;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.ListIterator;
 import java.util.Map;
 
 public class DatabaseTableList extends AbstractSet<DatabaseTable>{
 	
 	private class TableNamePair {
-		private String owner;
-		private String name;
+		private final String owner;
+		private final String name;
+		private final String qualifiedName;
 		TableNamePair(String owner, String name) {
 			this.owner = owner;
 			this.name = name;
+			this.qualifiedName = getQualifiedName();
 		}
 		
 		TableNamePair(DatabaseTable t) {
-			this.owner = t.owner();
-			this.name = t.name();
+			this(t.owner(), t.name());
+		}
+		
+		private String getQualifiedName() {
+			return (owner + "." + name).toLowerCase();
 		}
 		
 		public String qualifiedName() {
-			return (owner + "." + name).toLowerCase();
+			return qualifiedName;
 		}
+		
 		
 		@Override
 		public boolean equals(Object that) {
