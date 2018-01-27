@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTable;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTableList;
-import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTableColumnList;
 
 class TestDictionaryLoaderTest {
 	

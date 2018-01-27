@@ -7,9 +7,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 
 import ua.kiev.podolsky.DataGenerator.DataConnector.MySQL.MySQLDataConnector;
-import ua.kiev.podolsky.DataGenerator.DataDictionary.DataDictionaryConnector;
-import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTableList;
-import ua.kiev.podolsky.DataGenerator.DataDictionary.MySQL.MySQLDictionaryConnector;
 
 /**
  * @author igorp

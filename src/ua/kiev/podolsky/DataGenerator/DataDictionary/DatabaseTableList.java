@@ -3,7 +3,6 @@ package ua.kiev.podolsky.DataGenerator.DataDictionary;
 import java.util.AbstractSet;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class DatabaseTableList extends AbstractSet<DatabaseTable>{
