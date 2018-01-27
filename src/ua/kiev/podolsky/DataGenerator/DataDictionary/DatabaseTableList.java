@@ -3,6 +3,7 @@ package ua.kiev.podolsky.DataGenerator.DataDictionary;
 import java.util.AbstractSet;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class DatabaseTableList extends AbstractSet<DatabaseTable>{
@@ -80,6 +81,25 @@ public class DatabaseTableList extends AbstractSet<DatabaseTable>{
 	@Override
 	public int size() {
 		return intList.size();
+	}
+	
+	private DataDictionaryLoader loader;
+	
+	public DatabaseTableList(DataDictionaryLoader loader) {
+		super();
+		this.loader = loader;
+	}
+	
+	private boolean isLoaded = false;
+	
+	public boolean isLoaded() {return isLoaded;}
+	
+	public void load() {
+		if(isLoaded()) throw new UnsupportedOperationException("Reloading is not supported");
+		for(DatabaseTable t: loader.loadTables()) {
+			addTable(t);
+		}
+		isLoaded = true;
 	}
 
 }

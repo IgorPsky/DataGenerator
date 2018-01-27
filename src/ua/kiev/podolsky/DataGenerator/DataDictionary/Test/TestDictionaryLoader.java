@@ -1,5 +1,8 @@
 package ua.kiev.podolsky.DataGenerator.DataDictionary.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DataDictionaryLoader;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTable;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTableColumn;
@@ -35,6 +38,10 @@ public class TestDictionaryLoader implements DataDictionaryLoader {
 	}
 
 	class TestDatabaseTableList extends DatabaseTableList {
+		public TestDatabaseTableList(DataDictionaryLoader loader) {
+			super(loader);
+		}
+
 		@Override
 		protected void addTable(DatabaseTable t) {
 			super.addTable(t);
@@ -49,21 +56,22 @@ public class TestDictionaryLoader implements DataDictionaryLoader {
 	}
 
 	@Override
-	public DatabaseTableList loadTables() {
-		TestDatabaseTableList result = new TestDatabaseTableList();
-		result.addTable(new DatabaseTable("TEST_OWNER", "TEST_TABLE1"));
-		result.addTable(new DatabaseTable("TEST_OWNER", "TEST_TABLE2"));
+	public List<DatabaseTable> loadTables() {
+		List<DatabaseTable> result = new ArrayList<>();
+		result.add(new DatabaseTable("TEST_OWNER", "TEST_TABLE1", this));
+		result.add(new DatabaseTable("TEST_OWNER", "TEST_TABLE2", this));
 		return result;
 	}
 
 	@Override
-	public DatabaseTableColumnList loadColumns(DatabaseTable table) {
+	public List<DatabaseTableColumn> loadColumns(DatabaseTable table) {
+		List<DatabaseTableColumn> result = new ArrayList<>();
 		if(table.name().equals("TEST_TABLE1")) {
-			table.columns().addColumn(new TestDatabaseTableColumn(table, "ID", new DatabaseType(), 10, false));
-			result.addColumn(new TestDatabaseTableColumn(table, "Name", new DatabaseType(), 255, false));
+			result.add(new TestDatabaseTableColumn(table, "ID", new DatabaseType(), 10, false));
+			result.add(new TestDatabaseTableColumn(table, "Name", new DatabaseType(), 255, false));
 		} else if(table.name().equals("TEST_TABLE2")) {
-			result.addColumn(new TestDatabaseTableColumn(table, "ID", new DatabaseType(), 10, false));
-			result.addColumn(new TestDatabaseTableColumn(table, "Name", new DatabaseType(), 255, false));
+			result.add(new TestDatabaseTableColumn(table, "ID", new DatabaseType(), 10, false));
+			result.add(new TestDatabaseTableColumn(table, "Name", new DatabaseType(), 255, false));
 		} else
 			throw new RuntimeException("Table does not exist");
 		return result;

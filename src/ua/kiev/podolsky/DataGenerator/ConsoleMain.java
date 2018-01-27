@@ -27,8 +27,8 @@ public class ConsoleMain {
 		dc.connectString = "jdbc:mysql://localhost/";
 		dc.connect("DataGenerator", "DataGenerator");
 		try {
-			DataDictionaryConnector ddc = new MySQLDictionaryConnector(dc);
-			DatabaseTableList list = ddc.listTables("0=0");
+			// DataDictionaryConnector ddc = new MySQLDictionaryConnector(dc);
+			// DatabaseTableList list = ddc.listTables("0=0");
 		} finally
 		{
 		dc.disconnect();

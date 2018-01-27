@@ -41,4 +41,10 @@ public class DatabaseTableColumnList extends AbstractSet<DatabaseTableColumn> {
 	public DatabaseTableColumn columnByName(String colName) {
 		return intList.get(colName);
 	}
+	
+	public void loadFrom(DatabaseTable table, DataDictionaryLoader loader) {
+		for(DatabaseTableColumn c: loader.loadColumns(table)) {
+			addColumn(c);
+		}
+	}
 }

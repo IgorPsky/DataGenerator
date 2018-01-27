@@ -11,7 +11,11 @@ import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTableColumnList;
 class TestDictionaryLoaderTest {
 	
 	TestDictionaryLoader loader = new TestDictionaryLoader();
-	DatabaseTableList list = loader.loadTables();
+	DatabaseTableList list = new DatabaseTableList(loader);
+	
+	{
+		list.load();
+	}
 
 	@Test
 	void testTables() {
