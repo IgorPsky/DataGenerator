@@ -7,6 +7,8 @@ import ua.kiev.podolsky.DataGenerator.DataDictionary.DataDictionaryLoader;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTable;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTableColumn;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseType;
+import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataTypes.DatabaseTypeNumber;
+import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataTypes.DatabaseTypeString;
 
 public class TestDictionaryLoader implements DataDictionaryLoader {
 
@@ -22,11 +24,11 @@ public class TestDictionaryLoader implements DataDictionaryLoader {
 	public List<DatabaseTableColumn> loadColumns(DatabaseTable table) {
 		List<DatabaseTableColumn> result = new ArrayList<>();
 		if(table.name().equals("TEST_TABLE1")) {
-			result.add(DatabaseTableColumn.createColumn(table, "ID", new DatabaseType(), 10));
-			result.add(DatabaseTableColumn.createColumn(table, "Name", new DatabaseType(), 255));
+			result.add(DatabaseTableColumn.createColumn(table, "ID", new DatabaseTypeNumber(), 10));
+			result.add(DatabaseTableColumn.createColumn(table, "Name", new DatabaseTypeString(), 255));
 		} else if(table.name().equals("TEST_TABLE2")) {
-			result.add(DatabaseTableColumn.createColumn(table, "ID", new DatabaseType(), 10));
-			result.add(DatabaseTableColumn.createColumn(table, "Name", new DatabaseType(), 255));
+			result.add(DatabaseTableColumn.createColumn(table, "ID", new DatabaseTypeNumber(), 10));
+			result.add(DatabaseTableColumn.createColumn(table, "Name", new DatabaseTypeString(), 255));
 		} else
 			throw new RuntimeException("Table does not exist");
 		return result;
