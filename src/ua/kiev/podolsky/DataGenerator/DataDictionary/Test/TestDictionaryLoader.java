@@ -6,7 +6,6 @@ import java.util.List;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DataDictionaryLoader;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTable;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTableColumn;
-import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseType;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataTypes.DatabaseTypeNumber;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataTypes.DatabaseTypeString;
 
