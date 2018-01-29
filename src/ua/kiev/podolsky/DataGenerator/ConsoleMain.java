@@ -26,16 +26,28 @@ public class ConsoleMain {
 	public static void main(String[] args) throws SQLException {
 		Utils.LOGGER.log(Level.FINE, "Hello, world!");
 		Utils.LOGGER.log(Level.FINE, "ParamsCount:"+args.length);
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
 		doOracle();
 	}
 	
 	public static void doOracle() {
+		Connection conn = null;
 		try {
-			Connection conn = DriverManager.getConnection("jdbc.oracle.thin:@//vhgtestdb:1521/vhgtest", "igorp", "SkodaKodiaq#1");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@//vhgtestdb:1521/vhgtest", "igorp", "SkodaKodiaq#1");
 			DatabaseTableList l = new DatabaseTableList(new DataDictionaryLoaderOracle(conn));
 			l.load();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				throw new RuntimeException(e1);
+			}
 			throw new RuntimeException(e);
 		}
 		
