@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
 
-public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoader{
+public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoader, AutoCloseable {
 	private Connection connection;
 
 	public AbstractDataDictionaryLoader(Connection conn) {
@@ -35,19 +35,33 @@ public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoad
 		return new Iterable<DatabaseTable>() {
 			public Iterator<DatabaseTable> iterator() {
 				return new Iterator<DatabaseTable> () {
-
-					@Override
-					public boolean hasNext() {
+					
+					private boolean hasNext;
+					
+					{
 						try {
-							return rs.isLast();
-						} catch (SQLException e) {
+						    hasNext = rs.next();
+						}
+						catch (SQLException e) {
 							throw new RuntimeException(e);
 						}
 					}
 
 					@Override
+					public boolean hasNext() {
+						return hasNext;
+					}
+
+					@Override
 					public DatabaseTable next() {
-    					return createTable(rs);
+    					DatabaseTable result;
+						result = createTable(rs);
+    					try {
+							hasNext = rs.next();
+						} catch (SQLException e) {
+							throw new RuntimeException(e);
+						}
+    					return result;
 					}
 				};
 			}
@@ -62,6 +76,16 @@ public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoad
 	public Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public void close() {
+		try {
+			rs.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		rs = null;
 	}
 	
 }
