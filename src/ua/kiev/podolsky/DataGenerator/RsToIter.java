@@ -47,10 +47,10 @@ public class RsToIter {
 	}
 
 	public interface DataSet2Object<T> {
-		T createObject(ResultSet ds) throws SQLException;
+		T createObject(ResultSet rs) throws SQLException;
 	}
 
-	public static <T> Iterable<T> ResultSet2Iterable(ResultSet ds, DataSet2Object<T> objectCreator) {
+	public static <T> Iterable<T> ResultSet2Iterable(ResultSet rs, DataSet2Object<T> objectCreator) {
 		return new Iterable<T>() {
 
 			@Override
@@ -61,7 +61,7 @@ public class RsToIter {
 
 					{
 						try {
-							hasNext = ds.next();
+							hasNext = rs.next();
 						} catch (SQLException e) {
 							throw new RuntimeException(e);
 						}
@@ -76,8 +76,8 @@ public class RsToIter {
 					public T next() {
 						T res = null;
 						try {
-							res = objectCreator.createObject(ds);
-							hasNext = ds.next();
+							res = objectCreator.createObject(rs);
+							hasNext = rs.next();
 						} catch (SQLException e) {
 							throw new RuntimeException(e);
 						}

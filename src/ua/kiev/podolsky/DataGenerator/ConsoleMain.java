@@ -46,7 +46,6 @@ public class ConsoleMain {
 		for (DatabaseTable t: l) {
 			System.out.println(t.owner()+"."+t.name());
 		}
-		
 	}
 
 }

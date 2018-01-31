@@ -8,6 +8,26 @@ public class DatabaseTableColumn {
 	private final int length;
 	private final DatabaseType type;
 
+	public class Builder {
+		private DatabaseTable table;
+		private String columnName;
+		private boolean isNullable;
+		private boolean isUnique;
+		private int length;
+		private DatabaseType type;
+		public Builder(DatabaseTable table, String columnName) {
+			this.table = table;
+			this.columnName = columnName;
+		}
+		public Builder isNullable(boolean val) {this.isNullable = val; return this;}
+		public Builder isUnique(boolean val) {this.isUnique = val; return this;}
+		public Builder length(int val) {this.length = val; return this;}
+		public Builder type(DatabaseType val) {this.type = val; return this;}
+		public DatabaseTableColumn build() {
+			return new DatabaseTableColumn(table, columnName, type, length, isNullable, isUnique);
+		}
+	}
+	
 	public DatabaseTableColumn(DatabaseTable table, String name, DatabaseType type, int length, boolean isNullable,
 			boolean isUnique) {
 		columnName = name;
