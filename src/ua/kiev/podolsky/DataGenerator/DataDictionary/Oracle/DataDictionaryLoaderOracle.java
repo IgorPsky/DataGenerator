@@ -32,4 +32,19 @@ public class DataDictionaryLoaderOracle extends AbstractDataDictionaryLoader {
 			throw new RuntimeException(e);
 		}
 	}
+
+	@Override
+	public String getColumnsSelectStatement(DatabaseTable t) {
+		return "select column_name from all_tab_columns where table_name = \"" + t.name() + "\" and table_owner = \"" + t.owner() + "\"";
+	}
+
+	@Override
+	public DatabaseTableColumn createColumn(DatabaseTable t, ResultSet rs) {
+		// try {
+			// return new DatabaseTableColumn.Builder(t, rs.getString("COLUMN_NAME")).build();
+			return null;
+		// } catch (SQLException e) {
+		//	throw new RuntimeException(e);
+		// }
+	}
 }

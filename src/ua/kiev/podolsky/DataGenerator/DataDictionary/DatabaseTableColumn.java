@@ -1,5 +1,7 @@
 package ua.kiev.podolsky.DataGenerator.DataDictionary;
 
+import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataTypes.DatabaseTypeNumber;
+
 public class DatabaseTableColumn {
 	private final DatabaseTable table;
 	private final String columnName;
@@ -11,10 +13,10 @@ public class DatabaseTableColumn {
 	public class Builder {
 		private DatabaseTable table;
 		private String columnName;
-		private boolean isNullable;
-		private boolean isUnique;
-		private int length;
-		private DatabaseType type;
+		private boolean isNullable = true;
+		private boolean isUnique = false;
+		private int length = 10;
+		private DatabaseType type = new DatabaseTypeNumber();
 		public Builder(DatabaseTable table, String columnName) {
 			this.table = table;
 			this.columnName = columnName;
@@ -24,8 +26,17 @@ public class DatabaseTableColumn {
 		public Builder length(int val) {this.length = val; return this;}
 		public Builder type(DatabaseType val) {this.type = val; return this;}
 		public DatabaseTableColumn build() {
-			return new DatabaseTableColumn(table, columnName, type, length, isNullable, isUnique);
+			return new DatabaseTableColumn(this);
 		}
+	}
+	
+	private DatabaseTableColumn(Builder b) {
+		table = b.table;
+		columnName = b.columnName;
+		isNullable = b.isNullable;
+		isUnique = b.isUnique;
+		length = b.length;
+		type = b.type;
 	}
 	
 	public DatabaseTableColumn(DatabaseTable table, String name, DatabaseType type, int length, boolean isNullable,

@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Iterator;
-
 import ua.kiev.podolsky.DataGenerator.RsToIter;
 
 public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoader, AutoCloseable {
@@ -38,31 +36,27 @@ public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoad
 		}
 		return result;
 	}
-	/*
-	 * try { rs = executeStatement(getSelectStatement()); } catch (SQLException e) {
-	 * e.printStackTrace(); } return new Iterable<DatabaseTable>() { public
-	 * Iterator<DatabaseTable> iterator() { return new Iterator<DatabaseTable> () {
-	 * 
-	 * private boolean hasNext;
-	 * 
-	 * { try { hasNext = rs.next(); } catch (SQLException e) { throw new
-	 * RuntimeException(e); } }
-	 * 
-	 * @Override public boolean hasNext() { return hasNext; }
-	 * 
-	 * @Override public DatabaseTable next() { DatabaseTable result; result =
-	 * createTable(rs); try { hasNext = rs.next(); } catch (SQLException e) { throw
-	 * new RuntimeException(e); } return result; } }; } };
-	 */
 
 	public abstract String getSelectStatement();
 
 	public abstract DatabaseTable createTable(ResultSet rs);
 
+	ResultSet columnsRs;
+	
+	public abstract String getColumnsSelectStatement(DatabaseTable t);
+	
+	public abstract DatabaseTableColumn createColumn(DatabaseTable t, ResultSet rs);
+	
 	@Override
 	public Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table) {
-		// TODO Auto-generated method stub
-		return null;
+		Iterable<DatabaseTableColumn> result = null;
+		try  {
+			ResultSet rs = executeStatement(getColumnsSelectStatement(table));			
+			result = RsToIter.<DatabaseTableColumn>ResultSet2Iterable(rs, (ds) -> createColumn(table, ds));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
