@@ -49,7 +49,7 @@ public class DatabaseTableColumn {
 		this.isUnique = isUnique;
 	}
 
-	public String Name() {
+	public String name() {
 		return columnName;
 	}
 

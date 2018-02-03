@@ -1,6 +1,7 @@
 package ua.kiev.podolsky.DataGenerator.DataDictionary;
 
 import java.util.AbstractSet;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -93,9 +94,9 @@ public class DatabaseTableList extends AbstractSet<DatabaseTable>{
 	
 	public boolean isLoaded() {return isLoaded;}
 	
-	public void load() {
+	public void load(Collection<String> schemas) {
 		if(isLoaded()) throw new UnsupportedOperationException("Reloading is not supported");
-		for(DatabaseTable t: loader.loadTables()) {
+		for(DatabaseTable t: loader.loadTables(schemas)) {
 			addTable(t);
 		}
 		isLoaded = true;

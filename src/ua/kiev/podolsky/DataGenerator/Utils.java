@@ -8,12 +8,17 @@ public class Utils {
 	public static final Logger LOGGER = Logger.getLogger("DataGenerator");
 	public static final char QUOTE = '\'';
 	public static final char DOUBLEQUOTE = '"';
+	public static String StrSurround(String s, String surroundString) {
+		return surroundString + s + surroundString;
+	}
+	public static String StrSurround(String s, char surroundChar) {
+		return surroundChar + s + surroundChar;
+	}
 	public static String StrDoublequote(String s) {
-		return DOUBLEQUOTE + s + DOUBLEQUOTE;
+		return StrSurround(s, DOUBLEQUOTE);
 	}
 	public static String StrQuote(String s) {
-		return QUOTE + s + QUOTE;
+		return StrSurround(s, QUOTE);
 	}
-
 }
 

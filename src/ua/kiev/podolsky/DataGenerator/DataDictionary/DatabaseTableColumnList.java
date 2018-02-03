@@ -26,7 +26,7 @@ public class DatabaseTableColumnList extends AbstractSet<DatabaseTableColumn> {
 	}
 	
 	protected void addColumn(DatabaseTableColumn column) {
-		intList.put(column.Name(), column);
+		intList.put(column.name(), column);
 	}
 	
 	@Override

@@ -8,15 +8,23 @@ public class DatabaseTable extends DatabaseObject {
 	private DatabaseTableColumnList columns = null;
 	private DataDictionaryLoader loadedFrom = null;
 
-	public DatabaseTable(String owner, String name) {
+	private DatabaseTable(String owner, String name) {
 		super();
 		this.owner = owner;
 		this.name = name;
 	}
 
-	public DatabaseTable(String owner, String name, DataDictionaryLoader loadedFrom) {
+	private DatabaseTable(String owner, String name, DataDictionaryLoader loadedFrom) {
 		this(owner, name);
 		this.loadedFrom = loadedFrom;
+	}
+	
+	public static DatabaseTable create(String owner, String name) {
+		return new DatabaseTable(owner, name);
+	}
+	
+	public static DatabaseTable create(String owner, String name, DataDictionaryLoader loadedFrom) {
+		return new DatabaseTable(owner, name, loadedFrom);
 	}
 
 	public String owner() {

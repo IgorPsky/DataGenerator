@@ -1,6 +1,7 @@
 package ua.kiev.podolsky.DataGenerator.DataDictionary.Test;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DataDictionaryLoader;
@@ -12,10 +13,10 @@ import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataTypes.DatabaseT
 public class TestDictionaryLoader implements DataDictionaryLoader {
 
 	@Override
-	public List<DatabaseTable> loadTables() {
+	public List<DatabaseTable> loadTables(Collection<String> schemas) {
 		List<DatabaseTable> result = new ArrayList<>();
-		result.add(new DatabaseTable("TEST_OWNER", "TEST_TABLE1", this));
-		result.add(new DatabaseTable("TEST_OWNER", "TEST_TABLE2", this));
+		result.add(DatabaseTable.create("TEST_OWNER", "TEST_TABLE1", this));
+		result.add(DatabaseTable.create("TEST_OWNER", "TEST_TABLE2", this));
 		return result;
 	}
 

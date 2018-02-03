@@ -3,6 +3,8 @@ package ua.kiev.podolsky.DataGenerator.DataDictionary.Oracle;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
+
 import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataDictionaryLoader;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTable;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTableColumn;
@@ -20,13 +22,13 @@ public class DataDictionaryLoaderOracle extends AbstractDataDictionaryLoader {
 	}
 
 	@Override
-	public String getSelectStatement() {
+	public String getSelectStatement(Collection<String> schemas) {
 		return "select owner, table_name from all_tables";
 	}
 
 	@Override
 	public DatabaseTable createTable(ResultSet rs) throws SQLException {
-			return new DatabaseTable(rs.getString("OWNER"), rs.getString("TABLE_NAME"));
+			return DatabaseTable.create(rs.getString("OWNER"), rs.getString("TABLE_NAME"), this);
 	}
 
 	@Override

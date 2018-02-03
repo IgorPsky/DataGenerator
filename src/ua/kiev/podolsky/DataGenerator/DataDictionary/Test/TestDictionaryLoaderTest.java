@@ -13,7 +13,7 @@ class TestDictionaryLoaderTest {
 	DatabaseTableList list = new DatabaseTableList(loader);
 	
 	{
-		list.load();
+		list.load(null);
 	}
 
 	@Test

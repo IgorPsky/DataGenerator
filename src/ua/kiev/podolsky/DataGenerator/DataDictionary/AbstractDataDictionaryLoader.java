@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collection;
+
 import ua.kiev.podolsky.DataGenerator.RsToIter;
 
 public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoader, AutoCloseable {
@@ -26,10 +28,10 @@ public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoad
 	ResultSet rs;
 
 	@Override
-	public Iterable<DatabaseTable> loadTables() {
+	public Iterable<DatabaseTable> loadTables(Collection<String> schemas) {
 		Iterable<DatabaseTable> result = null;
 		try  {
-			ResultSet rs = executeStatement(getSelectStatement());			
+			ResultSet rs = executeStatement(getSelectStatement(schemas));			
 			result = RsToIter.<DatabaseTable>ResultSet2Iterable(rs, (ds) -> createTable(ds));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -37,7 +39,7 @@ public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoad
 		return result;
 	}
 
-	public abstract String getSelectStatement();
+	public abstract String getSelectStatement(Collection<String> schemas);
 
 	public abstract DatabaseTable createTable(ResultSet rs) throws SQLException;
 
