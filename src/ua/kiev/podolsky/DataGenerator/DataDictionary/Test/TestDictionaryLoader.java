@@ -33,4 +33,8 @@ public class TestDictionaryLoader implements DataDictionaryLoader {
 		return result;
 	}
 
+	@Override
+	public void close() {
+	}
+
 }

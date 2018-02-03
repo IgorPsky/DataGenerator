@@ -10,9 +10,9 @@ public class DatabaseTableColumn {
 	private final int length;
 	private final DatabaseType type;
 
-	public class Builder {
-		private DatabaseTable table;
-		private String columnName;
+	public static class Builder {
+		private final DatabaseTable table;
+		private final String columnName;
 		private boolean isNullable = true;
 		private boolean isUnique = false;
 		private int length = 10;

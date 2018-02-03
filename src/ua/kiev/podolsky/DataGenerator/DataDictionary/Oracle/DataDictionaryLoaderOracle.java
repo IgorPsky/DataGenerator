@@ -25,12 +25,8 @@ public class DataDictionaryLoaderOracle extends AbstractDataDictionaryLoader {
 	}
 
 	@Override
-	public DatabaseTable createTable(ResultSet rs) {
-		try {
+	public DatabaseTable createTable(ResultSet rs) throws SQLException {
 			return new DatabaseTable(rs.getString("OWNER"), rs.getString("TABLE_NAME"));
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	@Override
@@ -39,7 +35,7 @@ public class DataDictionaryLoaderOracle extends AbstractDataDictionaryLoader {
 	}
 
 	@Override
-	public DatabaseTableColumn createColumn(DatabaseTable t, ResultSet rs) {
+	public DatabaseTableColumn createColumn(DatabaseTable t, ResultSet rs) throws SQLException {
 		// try {
 			// return new DatabaseTableColumn.Builder(t, rs.getString("COLUMN_NAME")).build();
 			return null;
