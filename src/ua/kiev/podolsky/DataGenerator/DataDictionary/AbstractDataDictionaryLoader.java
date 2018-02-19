@@ -60,7 +60,7 @@ public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoad
 		}
 		return result;
 	}
-
+	
 	@Override
 	public void close() {
 		connection = null;

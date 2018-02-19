@@ -1,5 +1,7 @@
 package ua.kiev.podolsky.DataGenerator.DataDictionary.Oracle;
 
+import static ua.kiev.podolsky.DataGenerator.Utils.StrQuote;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +25,12 @@ public class DataDictionaryLoaderOracle extends AbstractDataDictionaryLoader {
 
 	@Override
 	public String getSelectStatement(Collection<String> schemas) {
-		return "select owner, table_name from all_tables";
+		StringBuilder inList = new StringBuilder();
+		for(String schema: schemas) {
+			if (inList.length() != 0) inList.append(", ");
+			inList.append(StrQuote(schema)); 
+			}
+		return "select owner, table_name from all_tables where owner in (" + inList + ")";
 	}
 
 	@Override

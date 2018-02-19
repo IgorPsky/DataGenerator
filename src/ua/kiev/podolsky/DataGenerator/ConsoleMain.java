@@ -37,8 +37,8 @@ public class ConsoleMain {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
-		// doOracle();
-		doMySQL();
+		doOracle();
+		// doMySQL();
 	}
 	
 	public static void doOracle() {
