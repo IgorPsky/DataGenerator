@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
+import java.util.function.Predicate;
 
 import ua.kiev.podolsky.DataGenerator.RsToIter;
 
@@ -28,13 +29,18 @@ public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoad
 	ResultSet rs;
 
 	@Override
-	public Iterable<DatabaseTable> loadTables(Collection<String> schemas) {
+	public final Iterable<DatabaseTable> loadTables(Collection<String> schemas) {
+		return loadTables(schemas, p -> true);
+	}
+	
+	@Override
+	public Iterable<DatabaseTable> loadTables(Collection<String> schemas, Predicate<DatabaseTable> filter) {
 		Iterable<DatabaseTable> result = null;
 		try  {
 			ResultSet rs = executeStatement(getSelectStatement(schemas));			
-			result = RsToIter.<DatabaseTable>ResultSet2Iterable(rs, (ds) -> createTable(ds));
+			result = RsToIter.<DatabaseTable>ResultSet2Iterable(rs, (ds) -> createTable(ds), filter);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		return result;
 	}
