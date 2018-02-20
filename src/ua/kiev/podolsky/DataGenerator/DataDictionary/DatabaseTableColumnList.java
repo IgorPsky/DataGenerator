@@ -3,8 +3,10 @@ package ua.kiev.podolsky.DataGenerator.DataDictionary;
 import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 public class DatabaseTableColumnList extends AbstractSet<DatabaseTableColumn> {
 	
@@ -45,6 +47,29 @@ public class DatabaseTableColumnList extends AbstractSet<DatabaseTableColumn> {
 	public void loadFrom(DatabaseTable table, DataDictionaryLoader loader) {
 		for(DatabaseTableColumn c: loader.loadColumns(table)) {
 			addColumn(c);
+		}
+	}
+	
+	protected DatabaseTableColumnList() {
+		
+	}
+	
+	private DatabaseTableColumnList(Set<DatabaseTableColumn> cols) {
+		this();
+		for(DatabaseTableColumn c: cols) {
+			addColumn(c);
+		}
+	}
+	
+	public static class Builder {
+		private Set<DatabaseTableColumn> columns = new HashSet<>();
+		public Builder add(DatabaseTableColumn c) {
+			columns.add(c);
+			return this;
+		}
+		public DatabaseTableColumnList build() {
+			DatabaseTableColumnList result = new DatabaseTableColumnList(columns);
+			return result;
 		}
 	}
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.function.Predicate;
 
 import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataDictionaryLoader;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTable;
@@ -19,7 +20,7 @@ public class DataDictionaryLoaderMySQL extends AbstractDataDictionaryLoader {
 	ResultSet rs = null;
 	
 	@Override
-	public Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table) {
+	public Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table, Predicate<DatabaseTableColumn> filter) {
 		return super.loadColumns(table);
 	}
 

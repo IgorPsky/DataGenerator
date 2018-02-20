@@ -27,7 +27,7 @@ public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoad
 	}
 
 	ResultSet rs;
-
+	
 	@Override
 	public final Iterable<DatabaseTable> loadTables(Collection<String> schemas) {
 		return loadTables(schemas, p -> true);
@@ -56,11 +56,16 @@ public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoad
 	public abstract DatabaseTableColumn createColumn(DatabaseTable t, ResultSet rs) throws SQLException;
 	
 	@Override
-	public Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table) {
+	public final Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table) {
+		return loadColumns(table, p -> true);
+	}
+	
+	@Override
+	public Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table, Predicate<DatabaseTableColumn> filter) {
 		Iterable<DatabaseTableColumn> result = null;
 		try  {
 			ResultSet rs = executeStatement(getColumnsSelectStatement(table));			
-			result = RsToIter.<DatabaseTableColumn>ResultSet2Iterable(rs, (ds) -> createColumn(table, ds));
+			result = RsToIter.<DatabaseTableColumn>ResultSet2Iterable(rs, (ds) -> createColumn(table, ds), filter);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

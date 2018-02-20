@@ -14,7 +14,7 @@ import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataTypes.DatabaseT
 public class TestDictionaryLoader implements DataDictionaryLoader {
 
 	@Override
-	public List<DatabaseTableColumn> loadColumns(DatabaseTable table) {
+	public List<DatabaseTableColumn> loadColumns(DatabaseTable table, Predicate<DatabaseTableColumn> filter) {
 		List<DatabaseTableColumn> result = new ArrayList<>();
 		if(table.name().equals("TEST_TABLE1")) {
 			result.add(DatabaseTableColumn.createColumn(table, "ID", new DatabaseTypeNumber(), 10));

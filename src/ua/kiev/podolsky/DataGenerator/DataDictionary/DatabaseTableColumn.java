@@ -2,7 +2,7 @@ package ua.kiev.podolsky.DataGenerator.DataDictionary;
 
 import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataTypes.DatabaseTypeNumber;
 
-public class DatabaseTableColumn {
+public class DatabaseTableColumn extends DatabaseObject{
 	private final DatabaseTable table;
 	private final String columnName;
 	private final boolean isNullable;
@@ -75,5 +75,10 @@ public class DatabaseTableColumn {
 
 	public static DatabaseTableColumn createColumn(DatabaseTable table, String name, DatabaseType type, int size) {
 		return new DatabaseTableColumn(table, name, type, size, true, false);
+	}
+
+	@Override
+	public String owner() {
+		return table.owner();
 	}
 }

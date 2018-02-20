@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.function.Predicate;
 
 import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataDictionaryLoader;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTable;
@@ -18,7 +19,7 @@ public class DataDictionaryLoaderOracle extends AbstractDataDictionaryLoader {
 	}
 
 	@Override
-	public Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table) {
+	public Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table, Predicate<DatabaseTableColumn> filter) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -45,11 +46,10 @@ public class DataDictionaryLoaderOracle extends AbstractDataDictionaryLoader {
 
 	@Override
 	public DatabaseTableColumn createColumn(DatabaseTable t, ResultSet rs) throws SQLException {
-		// try {
-			// return new DatabaseTableColumn.Builder(t, rs.getString("COLUMN_NAME")).build();
-			return null;
-		// } catch (SQLException e) {
-		//	throw new RuntimeException(e);
-		// }
+		try {
+			return new DatabaseTableColumn.Builder(t, rs.getString("COLUMN_NAME")).build();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
