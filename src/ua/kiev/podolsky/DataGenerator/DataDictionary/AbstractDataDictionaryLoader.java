@@ -55,19 +55,17 @@ public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoad
 	
 	public abstract DatabaseTableColumn createColumn(DatabaseTable t, ResultSet rs) throws SQLException;
 	
-	/*
+	@Override
 	public final Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table) {
-		return loadColumns(table, p -> true);
+		return loadColumns(table, (DatabaseTableColumn c) -> {return true;});
 	}
-		 */
-
 	
 	@Override
-	public Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table) {//, Predicate<DatabaseTableColumn> filter) {
+	public Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table, Predicate<DatabaseTableColumn> filter) {
 		Iterable<DatabaseTableColumn> result = null;
 		try  {
 			ResultSet rs = executeStatement(getColumnsSelectStatement(table));			
-			result = RsToIter.<DatabaseTableColumn>ResultSet2Iterable(rs, (ds) -> createColumn(table, ds));
+			result = RsToIter.<DatabaseTableColumn>ResultSet2Iterable(rs, (ds) -> createColumn(table, ds), filter);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

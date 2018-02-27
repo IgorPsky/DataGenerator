@@ -19,12 +19,6 @@ public class DataDictionaryLoaderOracle extends AbstractDataDictionaryLoader {
 	}
 
 	@Override
-	public Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table, Predicate<DatabaseTableColumn> filter) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String getSelectStatement(Collection<String> schemas) {
 		StringBuilder inList = new StringBuilder();
 		for(String schema: schemas) {
