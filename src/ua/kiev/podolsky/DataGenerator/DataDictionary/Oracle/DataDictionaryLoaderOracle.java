@@ -41,7 +41,7 @@ public class DataDictionaryLoaderOracle extends AbstractDataDictionaryLoader {
 
 	@Override
 	public String getColumnsSelectStatement(DatabaseTable t) {
-		return "select column_name from all_tab_columns where table_name = \"" + t.name() + "\" and table_owner = \"" + t.owner() + "\"";
+		return "select column_name from all_tab_columns where table_name = '" + t.name() + "' and owner = '" + t.owner() + "'";
 	}
 
 	@Override

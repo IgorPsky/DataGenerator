@@ -53,9 +53,13 @@ public class DatabaseTable extends DatabaseObject {
 	protected DatabaseTableColumnList createColumnList() {
 		if (isColumnsLoaded())
 			throw new UnsupportedOperationException();
-		DatabaseTableColumnList result = new DatabaseTableColumnList();
-		result.loadFrom(this, loadedFrom);
-		return result;
+		
+		DatabaseTableColumnList.Builder builder = DatabaseTableColumnList.createBuilder(this);
+		for(DatabaseTableColumn c: loadedFrom.loadColumns(this)) {
+			builder.add(c);
+		}
+		
+		return builder.build();
 	}
 
 }

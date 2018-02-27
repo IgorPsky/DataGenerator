@@ -49,11 +49,14 @@ public class ConsoleMain {
 			Collection<String> c = new ArrayList<>();
 			c.add("IGORP");
 			l.load(c);
+			for (DatabaseTable t: l) {
+				System.out.println(t.owner()+"."+t.name());
+				for (DatabaseTableColumn tc : t.columns()) {
+					System.out.println(tc.name());}
+			}
+				
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		} 
-		for (DatabaseTable t: l) {
-			System.out.println(t.owner()+"."+t.name());
 		}
 	}
 	

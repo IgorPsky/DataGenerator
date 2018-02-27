@@ -8,15 +8,25 @@ public class DatabaseTableKey extends DatabaseObject{
 	private final DatabaseTable table;
 	private String name;
 	private KeyType type;
-	private DatabaseTableColumnList cols = new DatabaseTableColumnList();
+	private DatabaseTableColumnList cols;
 	
 	public DatabaseTableKey(DatabaseTable table, String name, KeyType type) {
 		this.table = table;
 		this.name = name;
+		this.type = type;
+		cols = DatabaseTableColumnList.create(table);
 	}
 	
 	public DatabaseTable table() {
 		return this.table;
+	}
+	
+	public KeyType type() {
+		return type;
+	}
+	
+	public DatabaseTableColumnList columns() {
+		return cols;
 	}
 
 	@Override

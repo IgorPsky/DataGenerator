@@ -10,6 +10,7 @@ import java.util.Set;
 
 public class DatabaseTableColumnList extends AbstractSet<DatabaseTableColumn> {
 	
+	private DatabaseTable table;
 	private Map<String, DatabaseTableColumn> intList = new HashMap<>(); 
     protected Collection<DatabaseTableColumn> list() {return intList.values();}
 	class ColIterator implements Iterator<DatabaseTableColumn> {
@@ -50,26 +51,38 @@ public class DatabaseTableColumnList extends AbstractSet<DatabaseTableColumn> {
 		}
 	}
 	
-	protected DatabaseTableColumnList() {
-		
+	private DatabaseTableColumnList(DatabaseTable t) {
+		table = t;
 	}
 	
-	private DatabaseTableColumnList(Set<DatabaseTableColumn> cols) {
-		this();
+	private DatabaseTableColumnList(DatabaseTable t, Set<DatabaseTableColumn> cols) {
+		this(t);
 		for(DatabaseTableColumn c: cols) {
 			addColumn(c);
 		}
 	}
 	
+	public static DatabaseTableColumnList create(DatabaseTable t) {
+		return new DatabaseTableColumnList(t);
+	}
+	
 	public static class Builder {
+		private DatabaseTable table;
 		private Set<DatabaseTableColumn> columns = new HashSet<>();
 		public Builder add(DatabaseTableColumn c) {
 			columns.add(c);
 			return this;
 		}
 		public DatabaseTableColumnList build() {
-			DatabaseTableColumnList result = new DatabaseTableColumnList(columns);
+			DatabaseTableColumnList result = new DatabaseTableColumnList(table, columns);
 			return result;
 		}
+		private Builder(DatabaseTable t) {
+			table = t;
+		}
+	}
+	
+	public static Builder createBuilder(DatabaseTable t) {
+		return new Builder(t);
 	}
 }
