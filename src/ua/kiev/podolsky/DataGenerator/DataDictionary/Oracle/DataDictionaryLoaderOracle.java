@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataDictionaryLoader;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTable;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTableColumn;
+import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTableKey;
 
 public class DataDictionaryLoaderOracle extends AbstractDataDictionaryLoader {
 
@@ -45,5 +46,17 @@ public class DataDictionaryLoaderOracle extends AbstractDataDictionaryLoader {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public String getKeySelectStatement(DatabaseTable t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DatabaseTableKey createKey(ResultSet rs) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

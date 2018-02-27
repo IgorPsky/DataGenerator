@@ -46,13 +46,11 @@ public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoad
 	}
 
 	public abstract String getSelectStatement(Collection<String> schemas);
-
 	public abstract DatabaseTable createTable(ResultSet rs) throws SQLException;
 
 	ResultSet columnsRs;
 	
 	public abstract String getColumnsSelectStatement(DatabaseTable t);
-	
 	public abstract DatabaseTableColumn createColumn(DatabaseTable t, ResultSet rs) throws SQLException;
 	
 	@Override
@@ -70,6 +68,14 @@ public abstract class AbstractDataDictionaryLoader implements DataDictionaryLoad
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public abstract String getKeySelectStatement(DatabaseTable t);
+	public abstract DatabaseTableKey createKey(ResultSet rs);
+	
+	@Override
+	public Iterable<DatabaseTableKey> loadKeys(DatabaseTable table, Predicate<DatabaseTableKey> filter) {
+		return null;
 	}
 	
 	@Override

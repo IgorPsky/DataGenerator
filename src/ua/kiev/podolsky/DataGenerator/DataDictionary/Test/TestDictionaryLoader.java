@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DataDictionaryLoader;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTable;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTableColumn;
+import ua.kiev.podolsky.DataGenerator.DataDictionary.DatabaseTableKey;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataTypes.DatabaseTypeNumber;
 import ua.kiev.podolsky.DataGenerator.DataDictionary.AbstractDataTypes.DatabaseTypeString;
 
@@ -37,6 +38,12 @@ public class TestDictionaryLoader implements DataDictionaryLoader {
 		result.add(DatabaseTable.create("TEST_OWNER", "TEST_TABLE1", this));
 		result.add(DatabaseTable.create("TEST_OWNER", "TEST_TABLE2", this));
 		return result;
+	}
+
+	@Override
+	public Iterable<DatabaseTableKey> loadKeys(DatabaseTable table, Predicate<DatabaseTableKey> filter) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -12,5 +12,9 @@ public interface DataDictionaryLoader extends AutoCloseable {
 		return loadColumns(table, p -> true);
 	}
 	public Iterable<DatabaseTableColumn> loadColumns(DatabaseTable table, Predicate<DatabaseTableColumn> filter);
+	default public Iterable<DatabaseTableKey> loadKeys(DatabaseTable table){
+		return loadKeys(table, p -> true);
+	}
+	public Iterable<DatabaseTableKey> loadKeys(DatabaseTable table, Predicate<DatabaseTableKey> filter);
 	public void close();
 }
