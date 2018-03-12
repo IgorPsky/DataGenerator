@@ -39,7 +39,7 @@ public class DatabaseTableColumn extends DatabaseObject{
 		type = b.type;
 	}
 	
-	public DatabaseTableColumn(DatabaseTable table, String name, DatabaseType type, int length, boolean isNullable,
+	private DatabaseTableColumn(DatabaseTable table, String name, DatabaseType type, int length, boolean isNullable,
 			boolean isUnique) {
 		columnName = name;
 		this.isNullable = isNullable;
@@ -73,11 +73,10 @@ public class DatabaseTableColumn extends DatabaseObject{
 		return "";
 	}
 
-	public static DatabaseTableColumn createColumn(DatabaseTable table, String name, DatabaseType type, int size) {
+	private static DatabaseTableColumn createColumn(DatabaseTable table, String name, DatabaseType type, int size) {
 		return new DatabaseTableColumn(table, name, type, size, true, false);
 	}
 
-	@Override
 	public String owner() {
 		return table.owner();
 	}
