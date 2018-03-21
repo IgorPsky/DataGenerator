@@ -18,6 +18,7 @@ public class TestDictionaryLoader implements DataDictionaryLoader {
 	public List<DatabaseTableColumn> loadColumns(DatabaseTable table, Predicate<DatabaseTableColumn> filter) {
 		List<DatabaseTableColumn> result = new ArrayList<>();
 		if(table.name().equals("TEST_TABLE1")) {
+		    //result.add(new DatabaseTableColumn.Builder(table, "ID").type(val));
 			result.add(DatabaseTableColumn.createColumn(table, "ID", new DatabaseTypeNumber(), 10));
 			result.add(DatabaseTableColumn.createColumn(table, "Name", new DatabaseTypeString(), 255));
 		} else if(table.name().equals("TEST_TABLE2")) {

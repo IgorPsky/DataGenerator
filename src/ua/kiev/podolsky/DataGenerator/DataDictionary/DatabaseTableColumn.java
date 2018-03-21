@@ -73,7 +73,7 @@ public class DatabaseTableColumn extends DatabaseObject{
 		return "";
 	}
 
-	private static DatabaseTableColumn createColumn(DatabaseTable table, String name, DatabaseType type, int size) {
+	public static DatabaseTableColumn createColumn(DatabaseTable table, String name, DatabaseType type, int size) {
 		return new DatabaseTableColumn(table, name, type, size, true, false);
 	}
 
